@@ -1,0 +1,19 @@
+{
+  "name": "claspgittemplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "config:get:dev": "node index.js --dev --getConfig --srcDir",
+    "config:get:prod": "node index.js --prod --getConfig --srcDir",
+    "config:set:dev": "node index.js --prod --setConfig --srcDir",
+    "config:set:prod": "node index.js --prod --setConfig --srcDir"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.68"
+  },
+  "type": "module"
+}
