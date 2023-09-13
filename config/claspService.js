@@ -87,7 +87,7 @@ export class ClaspService {
   }
 
   /**
-   * Записывает данные из конфига в файлы .clasp.json и env.js
+   * Записывает данные из конфига в файлы .clasp.json и _env.js
    * @param {} config
    * @param {*} pathArr
    * @returns
@@ -126,12 +126,12 @@ export class ClaspService {
   }
 
   /**
-   * Получает данные из файлов .clasp.json и env.js и записывает в объект
-   * @returns {Promise<object>} объект с данными из файлов .clasp.json и env.js
+   * Получает данные из файлов .clasp.json и _env.js и записывает в объект
+   * @returns {Promise<object>} объект с данными из файлов .clasp.json и _env.js
    */
   async #readOnFile() {
     const filtredPaths = (await this.#srcDirFiles).filter(
-      (path) => path.includes('.clasp.json') || path.includes('env.js')
+      (path) => path.includes('.clasp.json') || path.includes('__env.js')
     );
     const configObj = {};
 
@@ -143,7 +143,7 @@ export class ClaspService {
       if (pathStr.includes('.json')) {
         readedData = JSON.parse(readedData);
       }
-      if (pathStr.includes('env.js')) {
+      if (pathStr.includes('_env.js')) {
         readedData = this.#jsToJson(readedData);
       }
 
@@ -173,7 +173,7 @@ export class ClaspService {
   }
 
   /**
-   * Преобразует объект json в строку с данными для файла env.js
+   * Преобразует объект json в строку с данными для файла _env.js
    * @param {object} json
    * @returns
    */
@@ -200,8 +200,8 @@ export class ClaspService {
   }
 
   /**
-   * Преобразует данные из файла env.js в объект json
-   * @param {string} string строка с данными из файла env.js
+   * Преобразует данные из файла _env.js в объект json
+   * @param {string} string строка с данными из файла _env.js
    * @returns
    */
   #jsToJson(string) {
@@ -247,7 +247,7 @@ export class ClaspService {
   }
 
   /**
-   * Получаеь дынные конфиг файла  и записывает  в файлы .clasp.json и env.js
+   * Получаеь дынные конфиг файла  и записывает  в файлы .clasp.json и _env.js
    */
   async getConfigData() {
     const config = await this.configFile;
@@ -256,7 +256,7 @@ export class ClaspService {
   }
 
   /**
-   * Получает данные из файлов .clasp.json и env.js и записывает в конфиг файл
+   * Получает данные из файлов .clasp.json и _env.js и записывает в конфиг файл
    */
   async setConfigData() {
     const filesData = await this.#readOnFile();
