@@ -32,6 +32,7 @@ clasp clone
 ```
 с идентификатором скрипта
 ![Идентификатор скрипта](https://github.com/helpexcel-pro/claspgittemplate/assets/101218004/e922ad82-4b89-4eab-bbb2-de7dfba4689d)
+
 или URL скрипта
 
 #### Примеры:
