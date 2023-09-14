@@ -21,6 +21,8 @@ npm i
 ```
 
 После того как установятся все зависимости, в папке `src` создайте отдельные папки для каждого appscript'a с которым будете работать в этом проекте.
+
+
 ![пример папок](https://github.com/helpexcel-pro/claspgittemplate/assets/101218004/19667cbf-8b10-4322-9328-04744481e303)
 
 ### Клонирование скриптов
@@ -31,6 +33,7 @@ npm i
 clasp clone
 ```
 с идентификатором скрипта
+
 ![Идентификатор скрипта](https://github.com/helpexcel-pro/claspgittemplate/assets/101218004/e922ad82-4b89-4eab-bbb2-de7dfba4689d)
 
 или URL скрипта
