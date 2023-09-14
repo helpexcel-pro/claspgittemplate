@@ -73,6 +73,7 @@ export class ClaspService {
    */
   async #setConfigFile(configFileName) {
     const template = `{
+      "_envGlobal.js": {},
       "dev": {},
       "prod": {}
     }`;
@@ -105,6 +106,7 @@ export class ClaspService {
               path.join(...pathArr, key),
               JSON.stringify(config[key]) || ''
             );
+
           key.includes('.js') &&
             !key.includes('.json') &&
             fs.writeFile(
@@ -113,11 +115,20 @@ export class ClaspService {
             );
         }
       }
+      const configFile = await this.configFile
+      
+      const _envGlobal = configFile[this.#mod]._envGlobal;
+      fs.writeFile(
+        path.join(...pathArr, '_envGlobal.js'),
+        this.#jsonToJs(_envGlobal) || ''
+      );
       return true;
     }
-
+      
     for (const key in config) {
-      if (Object.hasOwnProperty.call(config, key)) {
+      
+      if (Object.hasOwnProperty.call(config, key) && key !== '_envGlobal') {
+        
         const newpathArr = [...pathArr];
         newpathArr.push(key);
         this.#whriteToFiles(config[key], newpathArr);
@@ -131,9 +142,11 @@ export class ClaspService {
    */
   async #readOnFile() {
     const filtredPaths = (await this.#srcDirFiles).filter(
-      (path) => path.includes('.clasp.json') || path.includes('__env.js')
+      (path) => path.includes('.json') || path.includes('_env.js')
     );
-    const configObj = {};
+    const config = await this.configFile;
+    const _envGlobal = config[this.#mod]._envGlobal;
+    const configObj = {_envGlobal}
 
     for (const pathStr of filtredPaths) {
       const splitPath = pathStr.split('\\');
@@ -181,7 +194,10 @@ export class ClaspService {
     let result = '';
     for (const key in json) {
       if (Object.hasOwnProperty.call(json, key)) {
-        if (typeof json[key].value === 'string') {
+        if (
+          typeof json[key].value === 'string' &&
+          !json[key].value.includes('function')
+        ) {
           result += `const ${key} = "${json[key].value}"; ${
             (json[key].comment && '// ' + json[key].comment) || ''
           }\n`;
@@ -227,10 +243,13 @@ export class ClaspService {
         if (val[val.length - 1] === ';') {
           val = val.slice(0, val.length - 1);
         }
-
-        if (val.match(/(?<=[{])[^}]+/gm)) val = JSON.parse(val);
-
-        if (typeof val === 'string' && val.match(RegExp(/(?<=["'])[^"']+/gm))) {
+        if (val.includes('function')) {
+        } else if (val.match(/(?<=[{])[^}]+/gm)) {
+          val = JSON.parse(val);
+        } else if (
+          typeof val === 'string' &&
+          val.match(RegExp(/(?<=["'])[^"']+/gm))
+        ) {
           val = val.slice(1, val.length - 1);
         }
 
@@ -242,7 +261,7 @@ export class ClaspService {
           (resultJson[variable].comment = valAndCommSplit.pop());
       }
     }
-    
+
     return resultJson;
   }
 
