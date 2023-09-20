@@ -73,9 +73,13 @@ export class ClaspService {
    */
   async #setConfigFile(configFileName) {
     const template = `{
-      "_envGlobal.js": {},
-      "dev": {},
-      "prod": {}
+      
+      "dev": {
+        "_envGlobal.js": {},
+      },
+      "prod": {
+        "_envGlobal.js": {},
+      }
     }`;
     const configFile = await fs.writeFile(
       path.join(__dirname, configFileName),
