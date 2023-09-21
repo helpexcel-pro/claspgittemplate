@@ -1,5 +1,8 @@
 {
-  "_envGlobal":{},
-  "dev": {},
-  "prod": {}
+  "dev": {
+    "_envGlobal":{},
+  },
+  "prod": {
+    "_envGlobal":{},
+  }
 }
