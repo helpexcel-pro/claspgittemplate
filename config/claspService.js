@@ -122,6 +122,7 @@ export class ClaspService {
       const configFile = await this.configFile
       
       const _envGlobal = configFile[this.#mod]._envGlobal;
+      if (!Object.keys(_envGlobal).length) return;
       fs.writeFile(
         path.join(...pathArr, '_envGlobal.js'),
         this.#jsonToJs(_envGlobal) || ''

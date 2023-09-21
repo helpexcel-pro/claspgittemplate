@@ -1,8 +1,8 @@
 {
   "dev": {
-    "_envGlobal":{},
+    "_envGlobal":{}
   },
   "prod": {
-    "_envGlobal":{},
+    "_envGlobal":{}
   }
 }
