@@ -201,7 +201,8 @@ export class ClaspService {
       if (Object.hasOwnProperty.call(json, key)) {
         if (
           typeof json[key].value === 'string' &&
-          !json[key].value.includes('function')
+          !json[key].value.includes('function')&&
+          !json[key]?.comment?.includes('class method') 
         ) {
           result += `const ${key} = "${json[key].value}"; ${
             (json[key].comment && '// ' + json[key].comment) || ''
