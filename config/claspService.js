@@ -231,7 +231,7 @@ export class ClaspService {
 
     const rows = string
       .split('const')
-      .filter((el) => el.length)
+      .filter((el) => el.trim().length)
       .map((el) => el.replace(RegExp(/\n+/gm), ''));
 
     const varAndVal = rows.map((el) => el.split('=').map((e) => e.trim()));
