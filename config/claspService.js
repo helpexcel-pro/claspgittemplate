@@ -202,7 +202,7 @@ export class ClaspService {
         if (
           typeof json[key].value === 'string' &&
           !json[key].value.includes('function')&&
-          !json[key]?.comment?.includes('class method') 
+          !json[key]?.comment?.includes('not-string') 
         ) {
           result += `const ${key} = "${json[key].value}"; ${
             (json[key].comment && '// ' + json[key].comment) || ''
