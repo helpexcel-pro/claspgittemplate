@@ -8,7 +8,7 @@
     "config:get:prod": "node index.js --prod --getConfig --srcDir",
     "config:set:dev": "node index.js --dev --setConfig --srcDir",
     "config:set:prod": "node index.js --prod --setConfig --srcDir",
-    "pushall": "node claspPushAll.js"
+    "pushall": "node config/claspPushAll.js"
   },
   "keywords": [],
   "author": "",
