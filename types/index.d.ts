@@ -1,2 +1,2 @@
-
+declare const libHelper: libHelper;
 
